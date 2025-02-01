@@ -1,0 +1,38 @@
+[gd_scene load_steps=9 format=3 uid="uid://dh45dh10fmk0y"]
+
+[ext_resource type="Texture2D" uid="uid://nxwkysuhdjkb" path="res://Assets/Kenny Sketch Platformer/PNG/Retina/effect_shotLarge.png" id="1_038iq"]
+[ext_resource type="Script" uid="uid://c2ugpxojl4ha7" path="res://Scenes/power_swap.gd" id="1_oedwv"]
+[ext_resource type="Texture2D" uid="uid://b1be5rkjxyv18" path="res://Assets/Daniel/Catbase.svg" id="2_55q8w"]
+[ext_resource type="Texture2D" uid="uid://6ggec12wpl8p" path="res://Assets/Kenny Sketch Platformer/PNG/Retina/effect_blastLarge.png" id="2_oedwv"]
+[ext_resource type="Texture2D" uid="uid://clkk7v8o66phb" path="res://Assets/Daniel/Frogbase.svg" id="3_55q8w"]
+[ext_resource type="PackedScene" uid="uid://be3hf8ddhvhqk" path="res://Scenes/player.tscn" id="4_ieuit"]
+[ext_resource type="PackedScene" uid="uid://bagqk1ixvw52t" path="res://Scenes/frog.tscn" id="5_g32td"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ieuit"]
+size = Vector2(126, 231)
+
+[node name="PowerSwap" type="Node2D"]
+position = Vector2(1, 0)
+script = ExtResource("1_oedwv")
+image_array = Array[CompressedTexture2D]([ExtResource("2_55q8w"), ExtResource("3_55q8w")])
+scenes_array = Array[PackedScene]([ExtResource("4_ieuit"), ExtResource("5_g32td")])
+
+[node name="Post" type="Sprite2D" parent="."]
+position = Vector2(0, 105)
+rotation = 1.5708
+texture = ExtResource("1_038iq")
+
+[node name="Sign" type="Sprite2D" parent="."]
+texture = ExtResource("2_oedwv")
+
+[node name="PowerSymbol" type="Sprite2D" parent="."]
+scale = Vector2(0.175, 0.175)
+texture = ExtResource("2_55q8w")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 52.5)
+shape = SubResource("RectangleShape2D_ieuit")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

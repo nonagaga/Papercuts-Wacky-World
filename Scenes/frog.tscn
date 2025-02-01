@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://bagqk1ixvw52t"]
+
+[ext_resource type="PackedScene" uid="uid://be3hf8ddhvhqk" path="res://Scenes/player.tscn" id="1_85unm"]
+[ext_resource type="Texture2D" uid="uid://clkk7v8o66phb" path="res://Assets/Daniel/Frogbase.svg" id="2_4ygq6"]
+[ext_resource type="Script" uid="uid://basuv2wyle5ym" path="res://Scenes/frog.gd" id="2_c3muq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c3muq"]
+
+[node name="Frog" instance=ExtResource("1_85unm")]
+script = ExtResource("2_c3muq")
+max_jump_hold_sec = 1
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("2_4ygq6")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_c3muq")

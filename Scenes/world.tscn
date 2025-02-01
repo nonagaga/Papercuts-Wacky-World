@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=4 uid="uid://bdu6k2vw5qpp5"]
+
+[ext_resource type="Texture2D" uid="uid://bb54n4u22wbct" path="res://Assets/paper.jpg" id="2_go701"]
+[ext_resource type="PackedScene" uid="uid://be3hf8ddhvhqk" path="res://Scenes/player.tscn" id="3_5a7ea"]
+[ext_resource type="Script" uid="uid://cvmknmepbymx2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_5ukr8"]
+[ext_resource type="Script" uid="uid://cx4381ippxlpa" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="5_o06y3"]
+[ext_resource type="TileSet" uid="uid://dewcsyqk46dy2" path="res://Tilesets/Terrain.tres" id="6_5ukr8"]
+[ext_resource type="Script" uid="uid://doel3a8v7qbey" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_k7acu"]
+[ext_resource type="PackedScene" uid="uid://dh45dh10fmk0y" path="res://Scenes/power_swap.tscn" id="7_o06y3"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5ukr8"]
+normal = Vector2(1, 0)
+
+[sub_resource type="Resource" id="Resource_5v1tr"]
+script = ExtResource("6_k7acu")
+duration = 1.0
+transition = 0
+ease = 2
+
+[node name="World" type="Node2D"]
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("WorldBoundaryShape2D_5ukr8")
+
+[node name="BG" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.5, 1)
+repeat_size = Vector2(1600, 2070)
+
+[node name="Sprite2D" type="Sprite2D" parent="BG"]
+texture = ExtResource("2_go701")
+centered = false
+
+[node name="PowerSwap" parent="." instance=ExtResource("7_o06y3")]
+position = Vector2(1354, 604)
+power = 1
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAOAAgABAAAAAAAAAANAAgABAAAAAAAAAAMAAgABAAAAAAAAAALAAgABAAAAAAAAAAKAAgABAAAAAAAAAAJAAgABAAAAAAAAAAIAAgABAAAAAAAAAAHAAgABAAAAAAAAAAGAAgABAAAAAAAAAAFAAgABAAAAAAAAAAEAAgABAAAAAAAAAADAAgABAAAAAAAAAACAAgABAAAAAAAAAABAAgABAAAAAAAAAABAAcABAAAAAEAAAACAAcABAAAAAEAAAADAAcABAAAAAEAAAAEAAcABAAAAAEAAAAFAAcABAAAAAEAAAAGAAcABAAAAAEAAAAHAAcABAAAAAEAAAAIAAcABAAAAAEAAAAKAAcABAAAAAAAAAALAAcABAAAAAAAAAAMAAcABAAAAAEAAAANAAcABAAAAAEAAAAOAAcABAAAAAEAAAAAAAgABAAAAAAAAAAAAAcABAAAAAEAAAAKAAYABAAAAAEAAAALAAYABAAAAAEAAAAJAAYABAAAAAEAAAAJAAcABAAAAAAAAAAIAAYABAABAAEAABAMAAYABAABAAEAAAA=")
+tile_set = ExtResource("6_5ukr8")
+
+[node name="Player" parent="." instance=ExtResource("3_5a7ea")]
+position = Vector2(144, 651)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+physics_interpolation_mode = 1
+position = Vector2(960, 540)
+process_callback = 0
+limit_left = 0
+limit_bottom = 1080
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("4_5ukr8")
+
+[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+top_level = true
+position = Vector2(960, 540)
+script = ExtResource("5_o06y3")
+follow_mode = 2
+follow_target = NodePath("../Player")
+tween_resource = SubResource("Resource_5v1tr")
+limit_left = 0
+limit_bottom = 1080

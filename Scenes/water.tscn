@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bym15uwne3ntj"]
+
+[ext_resource type="Script" uid="uid://dl6fj72lp612w" path="res://Scenes/water.gd" id="1_slmpt"]
+
+[node name="Water" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+gravity_space_override = 3
+gravity = 490.0
+linear_damp_space_override = 3
+linear_damp = 1.0
+angular_damp_space_override = 3
+audio_bus_override = true
+audio_bus_name = &"Underwater"
+script = ExtResource("1_slmpt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

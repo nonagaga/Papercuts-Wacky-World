@@ -1,38 +1,122 @@
-[gd_scene load_steps=9 format=3 uid="uid://dh45dh10fmk0y"]
+[gd_scene load_steps=17 format=3 uid="uid://dh45dh10fmk0y"]
 
 [ext_resource type="Texture2D" uid="uid://nxwkysuhdjkb" path="res://Assets/Kenny Sketch Platformer/PNG/Retina/effect_shotLarge.png" id="1_038iq"]
 [ext_resource type="Script" uid="uid://c2ugpxojl4ha7" path="res://Scenes/power_swap.gd" id="1_oedwv"]
 [ext_resource type="Texture2D" uid="uid://b1be5rkjxyv18" path="res://Assets/Daniel/Catbase.svg" id="2_55q8w"]
 [ext_resource type="Texture2D" uid="uid://6ggec12wpl8p" path="res://Assets/Kenny Sketch Platformer/PNG/Retina/effect_blastLarge.png" id="2_oedwv"]
 [ext_resource type="Texture2D" uid="uid://clkk7v8o66phb" path="res://Assets/Daniel/Frogbase.svg" id="3_55q8w"]
-[ext_resource type="PackedScene" uid="uid://be3hf8ddhvhqk" path="res://Scenes/player.tscn" id="4_ieuit"]
+[ext_resource type="PackedScene" uid="uid://be3hf8ddhvhqk" path="res://Scenes/cat.tscn" id="4_ieuit"]
+[ext_resource type="Texture2D" uid="uid://crioatkm5p228" path="res://Assets/Daniel/Planebase.svg" id="4_n650t"]
+[ext_resource type="Texture2D" uid="uid://b8lf4e38t6xwe" path="res://Assets/Daniel/Submarinebase.svg" id="5_ap8px"]
 [ext_resource type="PackedScene" uid="uid://bagqk1ixvw52t" path="res://Scenes/frog.tscn" id="5_g32td"]
+[ext_resource type="PackedScene" uid="uid://b8b5mm7h7ki3w" path="res://Scenes/plane.tscn" id="7_boyeq"]
+[ext_resource type="AudioStream" uid="uid://chrk38rk76t4p" path="res://Assets/Sounds/powerUp.wav" id="8_g32td"]
+[ext_resource type="PackedScene" uid="uid://vgtk3enuh1sr" path="res://Scenes/sub.tscn" id="9_3e8l4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ieuit"]
 size = Vector2(126, 231)
 
-[node name="PowerSwap" type="Node2D"]
-position = Vector2(1, 0)
-script = ExtResource("1_oedwv")
-image_array = Array[CompressedTexture2D]([ExtResource("2_55q8w"), ExtResource("3_55q8w")])
-scenes_array = Array[PackedScene]([ExtResource("4_ieuit"), ExtResource("5_g32td")])
+[sub_resource type="Animation" id="Animation_g32td"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Viewmodel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CheckpointSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
-[node name="Post" type="Sprite2D" parent="."]
-position = Vector2(0, 105)
+[sub_resource type="Animation" id="Animation_ieuit"]
+resource_name = "checkpoint"
+length = 0.500003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Viewmodel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 0.189465, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 1.2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CheckpointSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1vsm1"]
+_data = {
+&"RESET": SubResource("Animation_g32td"),
+&"checkpoint": SubResource("Animation_ieuit")
+}
+
+[node name="PowerSwap" type="Node2D"]
+script = ExtResource("1_oedwv")
+image_array = Array[CompressedTexture2D]([ExtResource("2_55q8w"), ExtResource("3_55q8w"), ExtResource("4_n650t"), ExtResource("5_ap8px")])
+scenes_array = Array[PackedScene]([ExtResource("4_ieuit"), ExtResource("5_g32td"), ExtResource("7_boyeq"), ExtResource("9_3e8l4")])
+
+[node name="Viewmodel" type="Node2D" parent="."]
+position = Vector2(0, 155)
+
+[node name="Post" type="Sprite2D" parent="Viewmodel"]
+position = Vector2(1.00023, -140)
 rotation = 1.5708
 texture = ExtResource("1_038iq")
+offset = Vector2(92, 0.999667)
 
-[node name="Sign" type="Sprite2D" parent="."]
+[node name="Sign" type="Sprite2D" parent="Viewmodel"]
+position = Vector2(1.00023, -140)
 texture = ExtResource("2_oedwv")
+offset = Vector2(-1, -13)
 
-[node name="PowerSymbol" type="Sprite2D" parent="."]
+[node name="PowerSymbol" type="Sprite2D" parent="Viewmodel"]
+position = Vector2(1.00023, -140)
 scale = Vector2(0.175, 0.175)
 texture = ExtResource("2_55q8w")
+offset = Vector2(-5.71429, -74.2857)
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 52.5)
 shape = SubResource("RectangleShape2D_ieuit")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_1vsm1")
+}
+
+[node name="CheckpointSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_g32td")
+volume_db = -6.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

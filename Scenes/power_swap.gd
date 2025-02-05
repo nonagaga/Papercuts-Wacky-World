@@ -35,7 +35,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		var bodies = $Area2D.get_overlapping_bodies()
 		if(bodies.size() > 0):
 			var body :CharacterBody2D = bodies.front()
-			if body.has_method("submerged") or body.is_on_floor():
+			if body.has_method("submerge") or body.is_on_floor():
 				swap_power(bodies.front())
 
 

@@ -1,0 +1,67 @@
+[gd_scene load_steps=14 format=3 uid="uid://bagqk1ixvw52t"]
+
+[ext_resource type="Texture2D" uid="uid://clkk7v8o66phb" path="res://Assets/Daniel/Frogbase.svg" id="2_4ygq6"]
+[ext_resource type="Script" uid="uid://basuv2wyle5ym" path="res://Scenes/frog.gd" id="2_c3muq"]
+[ext_resource type="AudioStream" uid="uid://dnn8dkbyokidr" path="res://Assets/Sounds/Frogribbet1.wav" id="4_kbuj8"]
+[ext_resource type="Texture2D" uid="uid://bm4jv067x4r0o" path="res://Assets/Daniel/Frogidleface.png" id="4_xvrdk"]
+[ext_resource type="AudioStream" uid="uid://c6tjp1kg8w201" path="res://Assets/Sounds/Frogribbet2.wav" id="5_igvty"]
+[ext_resource type="AudioStream" uid="uid://coim017cgecdb" path="res://Assets/Sounds/Frogribbet3.wav" id="6_poaat"]
+[ext_resource type="AudioStream" uid="uid://b4kdecdymadbf" path="res://Assets/Sounds/Frogribbet4.wav" id="7_oox6q"]
+[ext_resource type="AudioStream" uid="uid://b8608128tyhg" path="res://Assets/Sounds/hitHurt.wav" id="8_igvty"]
+[ext_resource type="AudioStream" uid="uid://ciphb6fd7ks6m" path="res://Assets/Sounds/Frogdie1.wav" id="9_oox6q"]
+[ext_resource type="AudioStream" uid="uid://djna3qwvgsoc6" path="res://Assets/Sounds/Frogdie2.wav" id="10_5bqyd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c3muq"]
+radius = 7.85563
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5bqyd"]
+random_pitch = 1.2
+streams_count = 4
+stream_0/stream = ExtResource("4_kbuj8")
+stream_1/stream = ExtResource("5_igvty")
+stream_2/stream = ExtResource("6_poaat")
+stream_3/stream = ExtResource("7_oox6q")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_i3onm"]
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("9_oox6q")
+stream_1/stream = ExtResource("10_5bqyd")
+
+[node name="frog" type="CharacterBody2D" groups=["player"]]
+texture_filter = 2
+collision_layer = 2
+script = ExtResource("2_c3muq")
+max_squash_ratio = 0.7
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 33.44)
+scale = Vector2(0.240021, 0.240021)
+texture = ExtResource("2_4ygq6")
+offset = Vector2(0, -184.211)
+
+[node name="Face" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(0, -331.579)
+scale = Vector2(0.748, 0.748)
+texture = ExtResource("4_xvrdk")
+offset = Vector2(182.944, -3.05176e-05)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -13)
+scale = Vector2(5.95, 5.95)
+shape = SubResource("CircleShape2D_c3muq")
+
+[node name="Ribbit" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_5bqyd")
+pitch_scale = 0.8
+autoplay = true
+
+[node name="Footsteps" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_igvty")
+volume_db = -12.0
+pitch_scale = 1.38
+
+[node name="Die" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_i3onm")
+volume_db = 6.976
+pitch_scale = 0.8

@@ -1,0 +1,72 @@
+[gd_scene load_steps=17 format=3 uid="uid://b8b5mm7h7ki3w"]
+
+[ext_resource type="Script" uid="uid://c72p8bs7kn2kn" path="res://Scenes/plane.gd" id="1_ga0ca"]
+[ext_resource type="Texture2D" uid="uid://crioatkm5p228" path="res://Assets/Daniel/Planebase.svg" id="2_p5dpd"]
+[ext_resource type="AudioStream" uid="uid://b8608128tyhg" path="res://Assets/Sounds/hitHurt.wav" id="4_qk46l"]
+[ext_resource type="AudioStream" uid="uid://p0ro2w6i3626" path="res://Assets/Sounds/Catmeow1.wav" id="5_5g3pq"]
+[ext_resource type="AudioStream" uid="uid://cjscsliq7xfcn" path="res://Assets/Sounds/Catmeow2.wav" id="6_bjrb0"]
+[ext_resource type="AudioStream" uid="uid://dt04t26amijcj" path="res://Assets/Sounds/Catmeow3.wav" id="7_b7ak2"]
+[ext_resource type="AudioStream" uid="uid://bm8cx6k60x6da" path="res://Assets/Sounds/Catjump1.wav" id="8_balyn"]
+[ext_resource type="AudioStream" uid="uid://bim15w05wsr6k" path="res://Assets/Sounds/Catjump2.wav" id="9_ddojk"]
+[ext_resource type="AudioStream" uid="uid://dl0aefhd7q1q8" path="res://Assets/Sounds/Catjump3.wav" id="10_e53ap"]
+[ext_resource type="AudioStream" uid="uid://bderncarmh1k7" path="res://Assets/Sounds/Catdie1.wav" id="11_ablmg"]
+[ext_resource type="AudioStream" uid="uid://caria2772nylt" path="res://Assets/Sounds/Catdie2.wav" id="12_hrtu8"]
+[ext_resource type="AudioStream" uid="uid://hh6laq1hfbc2" path="res://Assets/Sounds/Catdie3.wav" id="13_6he5y"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p5dpd"]
+radius = 4.2
+height = 28.87
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_77tsj"]
+random_pitch = 1.1
+streams_count = 3
+stream_0/stream = ExtResource("5_5g3pq")
+stream_1/stream = ExtResource("6_bjrb0")
+stream_2/stream = ExtResource("7_b7ak2")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tsblf"]
+random_pitch = 1.2
+streams_count = 3
+stream_0/stream = ExtResource("8_balyn")
+stream_1/stream = ExtResource("9_ddojk")
+stream_2/stream = ExtResource("10_e53ap")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_gegng"]
+random_pitch = 1.2
+streams_count = 3
+stream_0/stream = ExtResource("11_ablmg")
+stream_1/stream = ExtResource("12_hrtu8")
+stream_2/stream = ExtResource("13_6he5y")
+
+[node name="plane" type="CharacterBody2D" groups=["player"]]
+texture_filter = 2
+collision_layer = 2
+script = ExtResource("1_ga0ca")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.291667, 0.291667)
+texture = ExtResource("2_p5dpd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-9.53674e-07, 2.35332e-12)
+rotation = 1.5708
+scale = Vector2(5, 5)
+shape = SubResource("CapsuleShape2D_p5dpd")
+
+[node name="Footsteps" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_qk46l")
+volume_db = -12.0
+pitch_scale = 1.38
+
+[node name="Meow" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_77tsj")
+pitch_scale = 1.5
+autoplay = true
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_tsblf")
+pitch_scale = 1.5
+
+[node name="Die" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_gegng")
+pitch_scale = 1.5

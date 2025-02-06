@@ -21,7 +21,7 @@ duration = 1.0
 transition = 0
 ease = 2
 
-[node name="FrogIntroLevel" type="Node2D"]
+[node name="CheckpointPuzzleLevel" type="Node2D"]
 
 [node name="LevelElements" type="Node" parent="."]
 

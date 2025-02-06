@@ -1,6 +1,5 @@
-[gd_scene load_steps=16 format=4 uid="uid://dygnaen7gvfuu"]
+[gd_scene load_steps=15 format=4 uid="uid://dygnaen7gvfuu"]
 
-[ext_resource type="PackedScene" uid="uid://ceixtf2220xjh" path="res://Scenes/main_menu.tscn" id="1_25dyl"]
 [ext_resource type="Texture2D" uid="uid://bb54n4u22wbct" path="res://Assets/paper.jpg" id="1_clv5j"]
 [ext_resource type="FontFile" uid="uid://du0f638v5w1wb" path="res://Assets/Fonts/Handwriting-Regular.otf" id="2_25dyl"]
 [ext_resource type="Texture2D" uid="uid://b8ytb7caf0i6d" path="res://Assets/Daniel/Arrow.png" id="3_lw1el"]
@@ -23,8 +22,6 @@ transition = 0
 ease = 2
 
 [node name="SubmarineLevel" type="Node2D"]
-
-[node name="MainMenu" parent="." instance=ExtResource("1_25dyl")]
 
 [node name="LevelElements" type="Node" parent="."]
 

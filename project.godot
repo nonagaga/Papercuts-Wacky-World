@@ -31,6 +31,12 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://Assets/Daniel/": "green"
+}
+
 [global_group]
 
 player=""

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6xlncsau8upq"
-path="res://.godot/imported/Logo.png-28b161d39a79cc55680f8794ab5e61ad.ctex"
+uid="uid://domgmqmw4fp51"
+path="res://.godot/imported/Silly - Copy (7).png-3d01915e770a17ba0260d543ae24239e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Daniel/Logo.png"
-dest_files=["res://.godot/imported/Logo.png-28b161d39a79cc55680f8794ab5e61ad.ctex"]
+source_file="res://Assets/Daniel/UI/Silly - Copy (7).png"
+dest_files=["res://.godot/imported/Silly - Copy (7).png-3d01915e770a17ba0260d543ae24239e.ctex"]
 
 [params]
 
